@@ -1,6 +1,7 @@
 package kr.hs.dgsw.idus_assignment.model.service
 
 import kr.hs.dgsw.idus_assignment.model.response.SearchResponse
+import kr.hs.dgsw.idus_assignment.model.response.WeatherItem
 import kr.hs.dgsw.idus_assignment.model.response.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,8 +14,8 @@ interface WeatherService {
         @Query("query") query : String
     ) : List<SearchResponse>
 
-    @GET("location/{woeid}/{year}/{month}/{day}")
+    @GET("location/{woeid}")
     suspend fun getWeatherInfo(
         @Path("woeid") woeid: Int
-    ): List<WeatherResponse>
+    ): WeatherItem
 }

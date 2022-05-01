@@ -47,9 +47,9 @@
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@{vm.todayWeatherIcon}"
                     tools:src="@drawable/ic_launcher_background"
-                    android:layout_gravity="center"/>
+                android:layout_gravity="center"/>
+                <!--                    android:src="@{vm.todayWeatherIcon}"-->
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -64,9 +64,9 @@
                         tools:text="Light Cloud"
                         android:gravity="bottom|start"
                         android:layout_weight="1"
-                        android:text="@{vm.todayWeatherState}"
                         android:textColor="@color/black"
-                        android:textSize="14sp"/>
+                    android:textSize="14sp"/>
+                    <!--                        android:text="@{vm.todayWeatherState}"-->
 
                     <LinearLayout
                         android:layout_width="100dp"
@@ -79,20 +79,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             tools:text="-7'C"
-                            android:text="@{vm.todayTemperature}"
                             android:gravity="top|start"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"/>
+                        android:textColor="@color/black"
+                        android:textSize="12sp"/>
+                        <!--                            android:text="@{vm.todayTemperature}"-->
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="68%"
                             android:gravity="top|start"
-                            android:text="@{vm.todayHumidity}"
                             android:layout_marginStart="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"/>
+                        android:textColor="@color/black"
+                        android:textSize="12sp"/>
+                        <!--                            android:text="@{vm.todayHumidity}"-->
                     </LinearLayout>
 
 
