@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="kr.hs.dgsw.idus_assignment.viewmodel.WeatherItemViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_item"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingTop="40dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="40dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                tools:text="Seoul" />
+
+            <LinearLayout
+                android:background="@drawable/background_stroke"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@{vm.todayWeatherIcon}"
+                    tools:src="@drawable/ic_launcher_background"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="0dp"
+                        tools:text="Light Cloud"
+                        android:gravity="bottom|start"
+                        android:layout_weight="1"
+                        android:text="@{vm.todayWeatherState}"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            tools:text="-7'C"
+                            android:text="@{vm.todayTemperature}"
+                            android:gravity="top|start"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="68%"
+                            android:gravity="top|start"
+                            android:text="@{vm.todayHumidity}"
+                            android:layout_marginStart="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@drawable/background_stroke"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    tools:src="@drawable/ic_launcher_background"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        tools:text="Light Cloud"
+                        android:gravity="bottom|start"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"/>
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            tools:text="-7'C"
+                            android:gravity="top|start"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="68%"
+                            android:gravity="top|start"
+                            android:layout_marginStart="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -15,6 +15,6 @@ interface WeatherService {
 
     @GET("location/{woeid}")
     suspend fun getWeatherInfo(
-        @Path("woeid") woeid: String): WeatherResponse
-    )
+        @Path("woeid") woeid: String
+    ): WeatherResponse
 }
