@@ -13,8 +13,8 @@ interface WeatherService {
         @Query("query") query : String
     ) : List<SearchResponse>
 
-    @GET("location/{woeid}/{}/{}/{}")
+    @GET("location/{woeid}/{year}/{month}/{day}")
     suspend fun getWeatherInfo(
         @Path("woeid") woeid: Int
-    ): WeatherResponse
+    ): List<WeatherResponse>
 }
