@@ -9,12 +9,12 @@ import retrofit2.http.Query
 
 interface WeatherService {
 
-    @GET("location/search/")
+    @GET("api/location/search/")
     suspend fun getWeatherInfoByName(
         @Query("query") query : String
     ) : List<SearchResponse>
 
-    @GET("location/{woeid}")
+    @GET("api/location/{woeid}")
     suspend fun getWeatherInfo(
         @Path("woeid") woeid: Int
     ): WeatherItem

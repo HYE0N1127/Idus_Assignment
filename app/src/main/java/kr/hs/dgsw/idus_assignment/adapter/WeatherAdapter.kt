@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kr.hs.dgsw.idus_assignment.R
 import kr.hs.dgsw.idus_assignment.adapter.WeatherAdapter.WeatherViewHolder
 import kr.hs.dgsw.idus_assignment.adapter.callback.WeatherDiffUtilCallBack
 import kr.hs.dgsw.idus_assignment.databinding.ItemWeatherBinding
+import kr.hs.dgsw.idus_assignment.model.Server
 import kr.hs.dgsw.idus_assignment.model.data.WeatherInfo
+import kr.hs.dgsw.idus_assignment.util.Constants
 import java.text.DecimalFormat
 
 class WeatherAdapter :
@@ -21,6 +24,9 @@ class WeatherAdapter :
 
         @SuppressLint("SetTextI18n")
         fun bind(data: WeatherInfo) {
+            val todayWeatherIcon = "${Constants.BASE_URL}static/img/weather/png/64/${data.today.weatherStateAbbr}.png"
+            val tomorrowWeatherIcon = "${Constants.BASE_URL}static/img/weather/png/64/${data.nextDay.weatherStateAbbr}.png"
+
             val todayTemp = String.format("%.0f", data.today.theTemp)
             val tomorrowTemp = String.format("%.0f", data.nextDay.theTemp)
 
@@ -34,6 +40,14 @@ class WeatherAdapter :
             binding.tvTemperatureTomorrow.text = "$todayTemp°C"
 
             binding.tvLocal.text = data.country
+
+            Glide.with(binding.root)
+                .load(todayWeatherIcon)
+                .into(binding.ivIconToday)
+
+            Glide.with(binding.root)
+                .load(tomorrowWeatherIcon)
+                .into(binding.ivIconTomorrow)
 
         }
     }
