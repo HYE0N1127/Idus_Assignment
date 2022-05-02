@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/hhb04/Desktop/Devs/Assignment/Idus_Assignment/app/src/main/res/drawable/background_item.xml" value="0.36875" />
+        <entry key="..\:/Users/hhb04/Desktop/Devs/Assignment/Idus_Assignment/app/src/main/res/drawable/background_search_et.xml" value="0.36875" />
+        <entry key="..\:/Users/hhb04/Desktop/Devs/Assignment/Idus_Assignment/app/src/main/res/drawable/background_stroke.xml" value="0.36875" />
+        <entry key="..\:/Users/hhb04/Desktop/Devs/Assignment/Idus_Assignment/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/hhb04/Desktop/Devs/Assignment/Idus_Assignment/app/src/main/res/layout/item_weather.xml" value="0.5" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
