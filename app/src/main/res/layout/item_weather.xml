@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
-        <variable
-            name="vm"
-            type="kr.hs.dgsw.idus_assignment.viewmodel.WeatherItemViewModel" />
-
-        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -23,6 +17,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_local"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_item"
@@ -36,63 +31,63 @@
                 tools:text="Seoul" />
 
             <LinearLayout
-                android:background="@drawable/background_stroke"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/background_stroke"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:padding="5dp">
 
                 <ImageView
+                    android:id="@+id/iv_icon_today"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    tools:src="@drawable/ic_launcher_background"
-                android:layout_gravity="center"/>
-                <!--                    android:src="@{vm.todayWeatherIcon}"-->
+                    android:layout_gravity="center"
+                    tools:src="@drawable/ic_launcher_background" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp">
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_weather_state_today"
                         android:layout_width="100dp"
                         android:layout_height="0dp"
-                        tools:text="Light Cloud"
-                        android:gravity="bottom|start"
                         android:layout_weight="1"
+                        android:gravity="bottom|start"
                         android:textColor="@color/black"
-                    android:textSize="14sp"/>
-                    <!--                        android:text="@{vm.todayWeatherState}"-->
+                        android:textSize="16sp"
+                        tools:text="Light Cloud" />
 
                     <LinearLayout
                         android:layout_width="100dp"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_marginTop="10dp"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_temperature_today"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            tools:text="-7'C"
                             android:gravity="top|start"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"/>
-                        <!--                            android:text="@{vm.todayTemperature}"-->
+                            android:textColor="@color/right_red"
+                            android:textSize="14sp"
+                            tools:text="-7'C" />
 
                         <TextView
+                            android:id="@+id/tv_humidity_today"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="68%"
-                            android:gravity="top|start"
                             android:layout_marginStart="5dp"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"/>
-                        <!--                            android:text="@{vm.todayHumidity}"-->
+                            android:gravity="top|start"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            tools:text="68%" />
                     </LinearLayout>
 
 
@@ -101,59 +96,63 @@
             </LinearLayout>
 
             <LinearLayout
-                android:background="@drawable/background_stroke"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/background_stroke"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:padding="5dp">
 
                 <ImageView
+                    android:id="@+id/iv_icon_tomorrow"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    tools:src="@drawable/ic_launcher_background"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:src="@drawable/ic_launcher_background" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10dp">
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_weather_state_tomorrow"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        tools:text="Light Cloud"
-                        android:gravity="bottom|start"
                         android:layout_weight="1"
+                        android:gravity="bottom|start"
                         android:textColor="@color/black"
-                        android:textSize="13dp"/>
+                        android:textSize="16sp"
+                        tools:text="Light Cloud" />
 
                     <LinearLayout
                         android:layout_width="100dp"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_marginTop="10dp"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_temperature_tomorrow"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            tools:text="-7'C"
                             android:gravity="top|start"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"/>
+                            android:textColor="@color/right_red"
+                            android:textSize="14sp"
+                            tools:text="-7'C" />
 
                         <TextView
+                            android:id="@+id/tv_humidity_tomorrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="68%"
-                            android:gravity="top|start"
                             android:layout_marginStart="5dp"
+                            android:gravity="top|start"
                             android:textColor="@color/black"
-                            android:textSize="12sp"/>
+                            android:textSize="14sp"
+                            tools:text="68%" />
                     </LinearLayout>
 
 

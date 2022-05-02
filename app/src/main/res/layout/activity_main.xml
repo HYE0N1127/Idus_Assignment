@@ -8,85 +8,101 @@
         <variable
             name="vm"
             type="kr.hs.dgsw.idus_assignment.viewmodel.MainViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         tools:context=".view.MainActivity">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingTop="20dp"
-            android:paddingEnd="10dp"
-            android:text="@string/application_title"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:paddingHorizontal="10dp">
-
-            <TextView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_item"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textSize="11dp"
-                android:text="Local"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/background_item"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textSize="11dp"
-                android:text="Today"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/background_item"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:padding="10dp"
-                android:textSize="11dp"
-                android:text="Tomorrow"/>
-        </LinearLayout>
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="10dp"
-            android:paddingBottom="10dp">
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="10dp"
+                android:text="@string/application_title"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_item"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/text_local"
+                    android:textColor="@color/black"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_item"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/text_today_weather"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_item"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/text_tomorrow_weather"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_weather" />
+                android:paddingHorizontal="10dp"
+                android:paddingBottom="10dp">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_weather"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_weather" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        </LinearLayout>
 
         <ProgressBar
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center" />
-
-    </LinearLayout>
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
