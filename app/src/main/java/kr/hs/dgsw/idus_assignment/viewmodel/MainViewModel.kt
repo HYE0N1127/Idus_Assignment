@@ -19,7 +19,6 @@ class MainViewModel() : ViewModel() {
     val isLoading : LiveData<Boolean> = _isLoading
 
     init {
-        _isLoading.value = false
         searchWeatherData(query)
     }
 

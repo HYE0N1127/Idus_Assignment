@@ -21,6 +21,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="@{vm.isLoading ? View.INVISIBLE : View.VISIBLE}"
             android:orientation="vertical">
 
             <TextView
@@ -81,6 +82,7 @@
                 android:id="@+id/swipe_refresh_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
                 android:paddingHorizontal="10dp"
                 android:paddingBottom="10dp">
 
@@ -100,6 +102,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:visibility="@{vm.isLoading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
