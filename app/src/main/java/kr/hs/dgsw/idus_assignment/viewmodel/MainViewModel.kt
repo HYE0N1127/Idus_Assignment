@@ -4,13 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kr.hs.dgsw.idus_assignment.model.data.WeatherInfo
 import kr.hs.dgsw.idus_assignment.repository.WeatherRepository
+import javax.inject.Inject
 
-class MainViewModel() : ViewModel() {
-    private val repository: WeatherRepository = WeatherRepository()
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val repository: WeatherRepository,
+) : ViewModel() {
+
     val query: String = "Se"
 
     private val _itemList = MutableLiveData<List<WeatherInfo>>()
