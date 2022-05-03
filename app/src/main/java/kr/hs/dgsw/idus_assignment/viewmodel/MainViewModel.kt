@@ -16,8 +16,6 @@ class MainViewModel @Inject constructor(
     private val repository: WeatherRepository,
 ) : ViewModel() {
 
-    val query: String = "Se"
-
     private val _itemList = MutableLiveData<List<WeatherInfo>>()
     val itemList: LiveData<List<WeatherInfo>> get() = _itemList
 
@@ -25,10 +23,10 @@ class MainViewModel @Inject constructor(
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        searchWeatherData(query)
+        searchWeatherData()
     }
 
-    fun searchWeatherData(searchQuery: String) = viewModelScope.launch {
+    fun searchWeatherData(searchQuery : String = "Se") = viewModelScope.launch {
         _isLoading.postValue(true)
 
         val response = repository.getWoeid(searchQuery)

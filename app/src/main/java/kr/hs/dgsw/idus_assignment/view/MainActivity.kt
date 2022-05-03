@@ -16,35 +16,32 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
+    private val weatherAdapter = WeatherAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         performDataBinding()
         setContentView(binding.root)
 
+        binding.rvWeather.adapter = weatherAdapter
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            viewModel.searchWeatherData()
+        }
         observerViewModel()
     }
 
     private fun observerViewModel() {
-        val adapter = WeatherAdapter()
-        binding.rvWeather.adapter = adapter
-
-        with(viewModel) {
-            itemList.observe(this@MainActivity, {
-                adapter.submitList(it)
-            })
-            binding.swipeRefreshLayout.setOnRefreshListener {
-                binding.swipeRefreshLayout.isRefreshing = false
-                searchWeatherData(query)
-            }
+        viewModel.itemList.observe(this) {
+            weatherAdapter.submitList(it)
         }
     }
 
     private fun performDataBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         binding.vm = viewModel
         binding.lifecycleOwner = this
-        binding.executePendingBindings()
     }
 
 }
