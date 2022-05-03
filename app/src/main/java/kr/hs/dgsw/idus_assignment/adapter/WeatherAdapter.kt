@@ -11,10 +11,8 @@ import kr.hs.dgsw.idus_assignment.R
 import kr.hs.dgsw.idus_assignment.adapter.WeatherAdapter.WeatherViewHolder
 import kr.hs.dgsw.idus_assignment.adapter.callback.WeatherDiffUtilCallBack
 import kr.hs.dgsw.idus_assignment.databinding.ItemWeatherBinding
-import kr.hs.dgsw.idus_assignment.model.Server
 import kr.hs.dgsw.idus_assignment.model.data.WeatherInfo
 import kr.hs.dgsw.idus_assignment.util.Constants
-import java.text.DecimalFormat
 
 class WeatherAdapter :
     ListAdapter<WeatherInfo, WeatherViewHolder>(WeatherDiffUtilCallBack) {
