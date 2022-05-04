@@ -42,7 +42,7 @@ class WeatherAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemWeatherBinding = ItemWeatherBinding.inflate(layoutInflater)
+        val binding: ItemWeatherBinding = ItemWeatherBinding.inflate(layoutInflater, parent, false)
 
         return WeatherViewHolder(binding)
     }

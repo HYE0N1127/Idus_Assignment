@@ -58,7 +58,7 @@
                     android:text="@{weather.today.weatherStateName}"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="10dp"
                     app:layout_constraintStart_toEndOf="@+id/iv_icon_today"
                     app:layout_constraintTop_toTopOf="@+id/iv_icon_today"
                     tools:text="Light Cloud" />
@@ -69,6 +69,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/right_red"
                     android:textSize="14sp"
+                    android:text="@{@string/temperature_format(weather.today.theTemp)}"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_icon_today"
                     app:layout_constraintStart_toStartOf="@+id/tv_weather_state_today"
                     tools:text="-7'C" />
@@ -79,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:text="@{Integer.toString(weather.today.humidity) + '%'}"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_icon_today"
                     app:layout_constraintEnd_toEndOf="@+id/tv_weather_state_today"
                     tools:text="68%" />
@@ -109,7 +111,7 @@
                     android:text="@{weather.nextDay.weatherStateName}"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="10dp"
                     app:layout_constraintStart_toEndOf="@+id/iv_icon_tomorrow"
                     app:layout_constraintTop_toTopOf="@+id/iv_icon_tomorrow"
                     tools:text="Light Cloud" />
@@ -120,6 +122,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/right_red"
                     android:textSize="14sp"
+                    android:text="@{@string/temperature_format(weather.nextDay.theTemp)}"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_icon_tomorrow"
                     app:layout_constraintStart_toStartOf="@+id/tv_weather_state_tomorrow"
                     tools:text="-7'C" />
@@ -130,6 +133,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:text="@{Integer.toString(weather.nextDay.humidity) + '%'}"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_icon_tomorrow"
                     app:layout_constraintEnd_toEndOf="@+id/tv_weather_state_tomorrow"
                     tools:text="68%" />
