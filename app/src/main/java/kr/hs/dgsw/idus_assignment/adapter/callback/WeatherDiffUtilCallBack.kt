@@ -8,7 +8,9 @@ import kr.hs.dgsw.idus_assignment.model.response.WeatherItem
 
 object WeatherDiffUtilCallBack : DiffUtil.ItemCallback<DataItem>() {
     override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-        return oldItem is WeatherItemWithHeader && newItem is WeatherItemWithHeader && oldItem.item.country == newItem.item.country
+        return oldItem is WeatherItemWithHeader
+                && newItem is WeatherItemWithHeader
+                && oldItem.item.country == newItem.item.country
 
     }
 

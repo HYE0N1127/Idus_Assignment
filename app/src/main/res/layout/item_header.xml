@@ -10,49 +10,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/background_item"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/text_local"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_today_weather"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_item"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/text_local"
-                android:textColor="@color/black"
-                android:textSize="11sp" />
+        <TextView
+            android:id="@+id/tv_today_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/background_item"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/text_today_weather"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_tomorrow_weather"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/background_item"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="@string/text_today_weather"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/background_item"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/text_tomorrow_weather"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_tomorrow_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/background_item"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/text_tomorrow_weather"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_today_weather"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

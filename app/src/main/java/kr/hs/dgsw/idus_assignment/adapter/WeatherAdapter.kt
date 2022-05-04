@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,33 +21,28 @@ private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
 
 class WeatherAdapter :
-    ListAdapter<DataItem, RecyclerView.ViewHolder>(WeatherDiffUtilCallBack) {
+    ListAdapter<DataItem, WeatherAdapter.WeatherHolder>(WeatherDiffUtilCallBack) {
 
-    private val adapterScope = CoroutineScope(Dispatchers.Default)
-
-    class WeatherViewHolder(private val binding: ItemWeatherBinding) :
-        ViewHolder(binding.root) {
-
-        fun bind(data: DataItem.WeatherItemWithHeader) {
-            binding.weather = data.item
-        }
-
-        companion object {
-            fun from(parent: ViewGroup): ViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemWeatherBinding.inflate(layoutInflater, parent, false)
-                return WeatherViewHolder(binding)
+    class WeatherHolder(private val binding: ViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: DataItem) {
+            if (binding is ItemWeatherBinding) {
+                if (data is DataItem.WeatherItemWithHeader)
+                    binding.weather = data.item
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            ITEM_VIEW_TYPE_HEADER -> HeaderViewHolder.from(parent)
-            ITEM_VIEW_TYPE_ITEM -> WeatherViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = when (viewType) {
+            ITEM_VIEW_TYPE_HEADER -> ItemHeaderBinding.inflate(inflater, parent, false)
+            ITEM_VIEW_TYPE_ITEM -> ItemWeatherBinding.inflate(inflater, parent, false)
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
+        return WeatherHolder(binding)
     }
+
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -55,40 +51,12 @@ class WeatherAdapter :
         }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        when (holder) {
-            is WeatherViewHolder -> {
-                val weatherItem = getItem(position) as DataItem.WeatherItemWithHeader
-                holder.bind(weatherItem)
-            }
-        }
-    }
-
-    fun addHeaderAndSubmitList(list: List<WeatherInfo>?) {
-        adapterScope.launch {
-            val itemList = ArrayList<DataItem>()
-
-            itemList.add(DataItem.Header)
-            list?.let { itemList.addAll(it.map { DataItem.WeatherItemWithHeader(it) }) }
-
-            withContext(Dispatchers.Main) {
-                submitList(itemList)
-            }
-        }
+    override fun onBindViewHolder(holder: WeatherHolder, position: Int) {
+        holder.bind(currentList[position])
     }
 }
 
 sealed class DataItem {
     data class WeatherItemWithHeader(val item: WeatherInfo) : DataItem()
     object Header : DataItem()
-}
-
-class HeaderViewHolder(binding: ItemHeaderBinding) : ViewHolder(binding.root) {
-    companion object {
-        fun from(parent: ViewGroup): HeaderViewHolder {
-            val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = ItemHeaderBinding.inflate(layoutInflater, parent, false)
-            return HeaderViewHolder(binding)
-        }
-    }
 }

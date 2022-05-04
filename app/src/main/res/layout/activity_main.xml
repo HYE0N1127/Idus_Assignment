@@ -17,48 +17,50 @@
         android:layout_height="match_parent"
         tools:context=".view.MainActivity">
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="swipe_refresh_layout, tv_local_weather"
+            android:visibility="@{vm.isLoading ? View.INVISIBLE : View.VISIBLE}"/>
+
+        <TextView
+            android:id="@+id/tv_local_weather"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="@{vm.isLoading ? View.INVISIBLE : View.VISIBLE}">
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="10dp"
+            android:text="@string/application_title"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="10dp"
-                android:text="@string/application_title"
-                android:textColor="@color/black"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_local_weather">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh_layout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_weather"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="10dp">
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_weather" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_weather"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    tools:listitem="@layout/item_weather" />
-
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-        </LinearLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
             android:visibility="@{vm.isLoading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kr.hs.dgsw.idus_assignment.R
+import kr.hs.dgsw.idus_assignment.adapter.DataItem
 import kr.hs.dgsw.idus_assignment.adapter.WeatherAdapter
 import kr.hs.dgsw.idus_assignment.databinding.ActivityMainBinding
 import kr.hs.dgsw.idus_assignment.viewmodel.MainViewModel
@@ -19,9 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private val weatherAdapter = WeatherAdapter()
-    private val manager = GridLayoutManager(this, 3)
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,19 +33,18 @@ class MainActivity : AppCompatActivity() {
             viewModel.searchWeatherData()
         }
 
-        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int = when (position) {
-                0 -> 1
-                else -> 1
-            }
-
-        }
         observerViewModel()
     }
 
     private fun observerViewModel() {
         viewModel.itemList.observe(this) {
-            weatherAdapter.addHeaderAndSubmitList(it)
+            weatherAdapter.submitList(
+                listOf(DataItem.Header) + it.map { weatherInfo ->
+                    DataItem.WeatherItemWithHeader(
+                        weatherInfo
+                    )
+                }
+            )
         }
     }
 
@@ -56,5 +53,4 @@ class MainActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
     }
-
 }
