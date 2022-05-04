@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kr.hs.dgsw.idus_assignment.adapter.DataItem
 import kr.hs.dgsw.idus_assignment.model.data.WeatherInfo
 import kr.hs.dgsw.idus_assignment.repository.WeatherRepository
 import javax.inject.Inject
@@ -46,4 +47,3 @@ class MainViewModel @Inject constructor(
         _isLoading.postValue(false)
     }
 }
-

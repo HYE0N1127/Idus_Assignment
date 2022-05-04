@@ -9,9 +9,6 @@
             name="weather"
             type="kr.hs.dgsw.idus_assignment.model.data.WeatherInfo" />
 
-        <variable
-            name="constants"
-            type="kr.hs.dgsw.idus_assignment.util.Constants" />
     </data>
 
     <LinearLayout
