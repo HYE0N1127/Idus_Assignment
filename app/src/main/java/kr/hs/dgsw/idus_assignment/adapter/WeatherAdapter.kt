@@ -1,65 +1,62 @@
 package kr.hs.dgsw.idus_assignment.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import kr.hs.dgsw.idus_assignment.R
-import kr.hs.dgsw.idus_assignment.adapter.WeatherAdapter.WeatherViewHolder
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kr.hs.dgsw.idus_assignment.adapter.callback.WeatherDiffUtilCallBack
+import kr.hs.dgsw.idus_assignment.databinding.ItemHeaderBinding
 import kr.hs.dgsw.idus_assignment.databinding.ItemWeatherBinding
 import kr.hs.dgsw.idus_assignment.model.data.WeatherInfo
-import kr.hs.dgsw.idus_assignment.util.Constants
+import java.lang.ClassCastException
+
+private const val ITEM_VIEW_TYPE_HEADER = 0
+private const val ITEM_VIEW_TYPE_ITEM = 1
 
 class WeatherAdapter :
-    ListAdapter<WeatherInfo, WeatherViewHolder>(WeatherDiffUtilCallBack) {
+    ListAdapter<DataItem, WeatherAdapter.WeatherHolder>(WeatherDiffUtilCallBack) {
 
-    class WeatherViewHolder(private val binding: ItemWeatherBinding) :
+    class WeatherHolder(private val binding: ViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        @SuppressLint("SetTextI18n")
-        fun bind(data: WeatherInfo) {
-            val todayWeatherIcon = "${Constants.BASE_URL}static/img/weather/png/64/${data.today.weatherStateAbbr}.png"
-            val tomorrowWeatherIcon = "${Constants.BASE_URL}static/img/weather/png/64/${data.nextDay.weatherStateAbbr}.png"
-
-            val todayTemp = String.format("%.0f", data.today.theTemp)
-            val tomorrowTemp = String.format("%.0f", data.nextDay.theTemp)
-
-            binding.tvHumidityToday.text = data.today.humidity.toString() + "%"
-            binding.tvHumidityTomorrow.text = data.nextDay.humidity.toString() + "%"
-
-            binding.tvWeatherStateToday.text = data.today.weatherStateName
-            binding.tvWeatherStateTomorrow.text = data.nextDay.weatherStateName
-
-            binding.tvTemperatureToday.text = "$tomorrowTemp°C"
-            binding.tvTemperatureTomorrow.text = "$todayTemp°C"
-
-            binding.tvLocal.text = data.country
-
-            Glide.with(binding.root)
-                .load(todayWeatherIcon)
-                .into(binding.ivIconToday)
-
-            Glide.with(binding.root)
-                .load(tomorrowWeatherIcon)
-                .into(binding.ivIconTomorrow)
-
+        fun bind(data: DataItem) {
+            if (binding is ItemWeatherBinding) {
+                if (data is DataItem.WeatherItemWithHeader)
+                    binding.weather = data.item
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemWeatherBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_weather, parent, false)
-
-        return WeatherViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = when (viewType) {
+            ITEM_VIEW_TYPE_HEADER -> ItemHeaderBinding.inflate(inflater, parent, false)
+            ITEM_VIEW_TYPE_ITEM -> ItemWeatherBinding.inflate(inflater, parent, false)
+            else -> throw ClassCastException("Unknown viewType $viewType")
+        }
+        return WeatherHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        holder.bind(getItem(position))
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is DataItem.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItem.WeatherItemWithHeader -> ITEM_VIEW_TYPE_ITEM
+        }
     }
 
+    override fun onBindViewHolder(holder: WeatherHolder, position: Int) {
+        holder.bind(currentList[position])
+    }
+}
+
+sealed class DataItem {
+    data class WeatherItemWithHeader(val item: WeatherInfo) : DataItem()
+    object Header : DataItem()
 }

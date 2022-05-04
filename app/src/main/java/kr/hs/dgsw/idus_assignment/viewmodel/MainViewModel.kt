@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kr.hs.dgsw.idus_assignment.adapter.DataItem
 import kr.hs.dgsw.idus_assignment.model.data.WeatherInfo
 import kr.hs.dgsw.idus_assignment.repository.WeatherRepository
 import javax.inject.Inject
@@ -16,8 +17,6 @@ class MainViewModel @Inject constructor(
     private val repository: WeatherRepository,
 ) : ViewModel() {
 
-    val query: String = "Se"
-
     private val _itemList = MutableLiveData<List<WeatherInfo>>()
     val itemList: LiveData<List<WeatherInfo>> get() = _itemList
 
@@ -25,19 +24,21 @@ class MainViewModel @Inject constructor(
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        searchWeatherData(query)
+        searchWeatherData()
     }
 
-    fun searchWeatherData(searchQuery: String) = viewModelScope.launch {
+    fun searchWeatherData(searchQuery : String = "Se") = viewModelScope.launch {
         _isLoading.postValue(true)
 
         val response = repository.getWoeid(searchQuery)
         val list = response.map {
             async {
                 val weather = repository.getWeatherData(it.woeid.toInt())
-                WeatherInfo(it.title,
+                WeatherInfo(
+                    it.title,
                     weather.consolidated_weather[0],
-                    weather.consolidated_weather[1])
+                    weather.consolidated_weather[1]
+                )
             }
         }.map {
             it.await()
@@ -46,4 +47,3 @@ class MainViewModel @Inject constructor(
         _isLoading.postValue(false)
     }
 }
-
