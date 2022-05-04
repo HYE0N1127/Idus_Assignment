@@ -20,23 +20,8 @@ class WeatherAdapter :
     class WeatherViewHolder(private val binding: ItemWeatherBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SetTextI18n")
         fun bind(data: WeatherInfo) {
-
             binding.weather = data
-
-            val todayWeatherIcon = Constants.IMAGE_URL + data.today.weatherStateAbbr + ".png"
-            val tomorrowWeatherIcon = Constants.IMAGE_URL + data.nextDay.weatherStateAbbr + ".png"
-
-            Glide.with(binding.root)
-                .load(todayWeatherIcon)
-                .into(binding.ivIconToday)
-
-            Glide.with(binding.root)
-                .load(tomorrowWeatherIcon)
-                .into(binding.ivIconTomorrow)
-
-
         }
     }
 
