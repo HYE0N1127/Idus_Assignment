@@ -33,9 +33,11 @@ class MainViewModel @Inject constructor(
         val list = response.map {
             async {
                 val weather = repository.getWeatherData(it.woeid.toInt())
-                WeatherInfo(it.title,
+                WeatherInfo(
+                    it.title,
                     weather.consolidated_weather[0],
-                    weather.consolidated_weather[1])
+                    weather.consolidated_weather[1]
+                )
             }
         }.map {
             it.await()

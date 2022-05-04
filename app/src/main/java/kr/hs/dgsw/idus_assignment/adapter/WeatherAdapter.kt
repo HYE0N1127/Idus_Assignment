@@ -22,22 +22,11 @@ class WeatherAdapter :
 
         @SuppressLint("SetTextI18n")
         fun bind(data: WeatherInfo) {
-            val todayWeatherIcon = "${Constants.BASE_URL}static/img/weather/png/64/${data.today.weatherStateAbbr}.png"
-            val tomorrowWeatherIcon = "${Constants.BASE_URL}static/img/weather/png/64/${data.nextDay.weatherStateAbbr}.png"
 
-            val todayTemp = String.format("%.0f", data.today.theTemp)
-            val tomorrowTemp = String.format("%.0f", data.nextDay.theTemp)
+            binding.weather = data
 
-            binding.tvHumidityToday.text = data.today.humidity.toString() + "%"
-            binding.tvHumidityTomorrow.text = data.nextDay.humidity.toString() + "%"
-
-            binding.tvWeatherStateToday.text = data.today.weatherStateName
-            binding.tvWeatherStateTomorrow.text = data.nextDay.weatherStateName
-
-            binding.tvTemperatureToday.text = "$tomorrowTemp°C"
-            binding.tvTemperatureTomorrow.text = "$todayTemp°C"
-
-            binding.tvLocal.text = data.country
+            val todayWeatherIcon = Constants.IMAGE_URL + data.today.weatherStateAbbr + ".png"
+            val tomorrowWeatherIcon = Constants.IMAGE_URL + data.nextDay.weatherStateAbbr + ".png"
 
             Glide.with(binding.root)
                 .load(todayWeatherIcon)
@@ -47,13 +36,13 @@ class WeatherAdapter :
                 .load(tomorrowWeatherIcon)
                 .into(binding.ivIconTomorrow)
 
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemWeatherBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_weather, parent, false)
+        val binding: ItemWeatherBinding = ItemWeatherBinding.inflate(layoutInflater)
 
         return WeatherViewHolder(binding)
     }
